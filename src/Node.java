@@ -3,35 +3,60 @@ public class Node {
     private Node next = null;
 
     public Node(int value){
-        // TODO
+        this.value = value;
     }
 
     public Node(int value, Node next){
-        // TODO
+            this.value = value;
+            this.next = next;
     }
 
     public void addValue(int value){
-        // TODO
+        if (this.next == null){
+            this.next = new Node(value);
+        }else{
+            this.next.addValue(value);
+        }
+
     }
 
     public void addNode(Node next){
-        // TODO
+         //TODO
     }
 
     public void removeLast(){
-        // TODO
+        if (this.next.next == null) {
+            this.next = null;
+        } else {
+            this.next.removeLast();
+        }
     }
+
 
     public void removeValue(int value){
-        // TODO
+        if (this.next != null) {
+            if (this.next.value == value) {
+                this.next = this.next.next;
+                removeValue(value);
+            } else {
+                this.next.removeValue(value);
+            }
+        }
     }
 
-    public int length_iteratif(){
-        // TODO
-        return 0;
+
+public int length_iteratif(){
+        int count = 1 ;
+        Node current = this;
+        while (current.next != null){
+            count++;
+            current= current.next;
+
+        }
+        return count;
     }
 
-    public int length_recurssion(){
+    public int length_recursion(){
         // TODO
         return 0;
     }
@@ -47,5 +72,14 @@ public class Node {
 
     public void insertSort(){
         // TODO
+    }
+
+    public static void main(String[] args) {
+        Node n = new Node(0);
+        n.addValue(1);
+        n.addValue(2);
+
+        System.out.println(n.length_iteratif());
+
     }
 }
