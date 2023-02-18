@@ -57,23 +57,5 @@ public class File {
         }
     }
 
-    public static void main(String[] args) {
-        File file = new File();
-        {
-            file.push(1);
-            file.push(2);
-            file.push(3);
-            file.push(4);
-            file.push(3);
-            file.push(7);
-            file.print();
-            file.remove(7);
-            file.remove(3);
-            file.print();
-            System.out.println(file.length());
 
-
-        }
-
-    }
 }
