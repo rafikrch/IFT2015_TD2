@@ -110,11 +110,6 @@ public class Node {
     }
     public void addValue_ordered(int value){
             Node newNode = new Node(value);
-            if (value < value) {
-                newNode.next = this;
-                value = value;
-                return;
-            }
             Node current = this;
             while (current.next != null && current.next.value < value) {
                 current = current.next;
@@ -153,5 +148,6 @@ public class Node {
         value = newHead.value;
         next = newHead.next;
     }
+
 
 }
