@@ -40,8 +40,11 @@ public class File {
         tab +=")";
         System.out.println(tab);
     }
-    public boolean search() {
+    public boolean search(int element) {
         for(int i = 0; i < taille; i++){
+            if(elements[i] == element){
+                return true;
+            }
 
         }
         return false;
@@ -57,23 +60,6 @@ public class File {
         }
     }
 
-    public static void main(String[] args) {
-        File file = new File();
-        {
-            file.push(1);
-            file.push(2);
-            file.push(3);
-            file.push(4);
-            file.push(3);
-            file.push(7);
-            file.print();
-            file.remove(7);
-            file.remove(3);
-            file.print();
-            System.out.println(file.length());
 
 
-        }
-
-    }
 }
