@@ -88,7 +88,6 @@ public class Node {
             if (count == index) {
                 return current.value;
             }
-
         }
        return -1;
     }

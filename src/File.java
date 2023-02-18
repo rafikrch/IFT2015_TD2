@@ -15,7 +15,6 @@ public class File {
 
     }
 
-
     public int pop() {
         int element = elements[start];
         elements[start] = 0;
@@ -40,22 +39,24 @@ public class File {
         tab +=")";
         System.out.println(tab);
     }
-    public boolean search() {
+    public boolean search(int value) {
         for(int i = 0; i < taille; i++){
-
+            if (elements[i] == value){
+                return true;
+            }
         }
         return false;
     }
 
     public void remove(int value) {
+        int index = start;
         for (int i = 0; i < taille; i++) {
-            if (elements[i] == value) {
-                elements[i] = 0;
+            if (elements[index] == value) {
+                elements[index] = 0;
                 break;
             }
+            index = (index+1) % elements.length;
 
         }
     }
-
-
 }
