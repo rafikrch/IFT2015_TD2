@@ -177,5 +177,6 @@ public class Grid
         move(grille[2]);
         move(grille[3]);
         move(grille[7]);
+
     }
 }
