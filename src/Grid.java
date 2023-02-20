@@ -8,6 +8,7 @@ public class Grid
         private Cell right;
         private Cell left;
 
+        //Constructeur d'une cell:
         public Cell(int value, Cell up, Cell down, Cell right, Cell left)
         {
             this.value = value;
@@ -21,6 +22,7 @@ public class Grid
     public static Cell[] grille;
     public Cell cellVide;
 
+    //Constructeur de la grid:
     public Grid()
     {
         grille = new Cell[12];
@@ -40,7 +42,7 @@ public class Grid
         grille[9] = new Cell(10, null, null, null, null);
         grille[10] = new Cell(1, null, null, null, null);
 
-        //Association des ups:
+        //Association des Ups:
         grille[4].up = grille[0];
         grille[5].up = grille[1];
         grille[6].up = grille[2];
@@ -50,7 +52,7 @@ public class Grid
         grille[9].up = grille[5];
         grille[10].up = grille[6];
 
-        //Association des downs:
+        //Association des Downs:
         grille[0].down = grille[4];
         grille[1].down = grille[5];
         grille[2].down = grille[6];
@@ -60,7 +62,7 @@ public class Grid
         grille[5].down = grille[9];
         grille[6].down = grille[10];
 
-        //Associations des rights:
+        //Associations des Rights:
         grille[0].right = grille[1];
         grille[1].right = grille[2];
         grille[2].right = grille[3];
@@ -72,7 +74,7 @@ public class Grid
         grille[8].right = grille[9];
         grille[9].right = grille[10];
 
-        //Associations des lefts:
+        //Associations des Lefts:
         grille[1].left = grille[0];
         grille[2].left = grille[1];
         grille[3].left = grille[2];
@@ -92,44 +94,44 @@ public class Grid
         grille[10].right = grille[11];
     }
 
+    //Méthode permettant de déplacer une case à la place de la case vide:
     public boolean move(Cell box)
     {
-        Cell temp = null;
+        Cell temporaire = new Cell(0, null, null, null, null);
         Cell boxUp = box.up;
         Cell boxDown = box.down;
         Cell boxRight = box.right;
         Cell boxLeft = box.left;
 
-        if (boxUp.value == -1)
+        //On vérifie que le mouvement est légal, puis on swap les deux cells:
+        if (boxUp.value == -1 || boxDown.value == -1 || boxRight.value == -1 || boxLeft.value == -1)
         {
-            temp = boxUp;
-            boxUp = cellVide;
-            cellVide = temp;
-            return true;
-        }
-        else if (boxDown.value == -1)
-        {
-            temp = cellVide;
-            for (Cell i: grille)
+            temporaire.value = box.value;
+            temporaire.up = boxUp;
+            temporaire.down = boxDown;
+            temporaire.right = boxRight;
+            temporaire.left = boxLeft;
+
+            box.value = cellVide.value;
+            boxUp = cellVide.up;
+            boxDown = cellVide.down;
+            boxRight = cellVide.right;
+            boxLeft = cellVide.left;
+
+            for (int i = 0; i < grille.length; i++)
             {
-                if (i == cellVide)
+                if (grille[i] == cellVide)
                 {
-                    i.value = box.value;
-                    i.up = box.up;
-                    i.down = box.down;
-                    i.right = box.right;
-                    i.left = box.left;
+                    grille[i].value = temporaire.value;
+                    grille[i].up = temporaire.up;
+                    grille[i].down = temporaire.down;
+                    grille[i].right = temporaire.right;
+                    grille[i].left = temporaire.left;
                 }
             }
-
-            box.value = temp.value;
-            boxUp = temp.up;
-            boxDown = temp.down;
-            boxRight = temp.right;
-            boxLeft = temp.left;
             return true;
         }
-        // boxRight.value == -1 || boxLeft.value == -1) A ajouter
+        //Si mouvement illégal (case vide et à déplacer non-adjacentes):
         else
         {
             return false;
@@ -150,7 +152,6 @@ public class Grid
     public static void main(String[] args)
     {
         Grid grid = new Grid();
-        System.out.println(grille[8].right.value);
 
         System.out.println("Liste avant move: \n");
         for (Cell i: grille)
