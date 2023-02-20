@@ -104,7 +104,10 @@ public class Grid
         Cell boxLeft = box.left;
 
         //On vérifie que le mouvement est légal, puis on swap les deux cells:
-        if (boxUp.value == -1 || boxDown.value == -1 || boxRight.value == -1 || boxLeft.value == -1)
+        if (((boxUp != null) && (boxUp.value == -1)) || 
+        ((boxDown != null) && (boxDown.value == -1)) || 
+        ((boxRight != null) && (boxRight.value == -1)) || 
+        ((boxLeft != null) && (boxLeft.value == -1)))
         {
             temporaire.value = box.value;
             temporaire.up = boxUp;
@@ -118,15 +121,15 @@ public class Grid
             boxRight = cellVide.right;
             boxLeft = cellVide.left;
 
-            for (int i = 0; i < grille.length; i++)
+            for (Cell i: grille)
             {
-                if (grille[i] == cellVide)
+                if (i == cellVide)
                 {
-                    grille[i].value = temporaire.value;
-                    grille[i].up = temporaire.up;
-                    grille[i].down = temporaire.down;
-                    grille[i].right = temporaire.right;
-                    grille[i].left = temporaire.left;
+                    i.value = temporaire.value;
+                    i.up = temporaire.up;
+                    i.down = temporaire.down;
+                    i.right = temporaire.right;
+                    i.left = temporaire.left;
                 }
             }
             return true;
@@ -140,31 +143,63 @@ public class Grid
 
     public boolean check_complete()
     {
-        // TODO
-        return true;
+        if ((grille[0].value == grille[8].value) && 
+        (grille[1].value == grille[9].value) && 
+        (grille[2].value == grille[10].value) &&
+        (grille[3].value == grille[11].value))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
+    //Méthode qui donne un exemple de solution possible:
     public void solve_game()
     {
-        // TODO
+        move(grille[7]);
+        move(grille[6]);
+        move(grille[5]);
+        move(grille[4]);
+        move(grille[0]);
+        move(grille[1]);
+        move(grille[5]);
+        move(grille[4]);
+        move(grille[8]);
+        move(grille[9]);
+        move(grille[10]);
+        move(grille[11]);
+        move(grille[7]);
+        move(grille[6]);
+        move(grille[2]);
+        move(grille[3]);
+        move(grille[7]);
     }
 
     public static void main(String[] args)
     {
+        String str1 = "";
+        String str2 = "";
         Grid grid = new Grid();
+        //grid.solve_game();
+        //System.out.println(grid.check_complete());
 
-        System.out.println("Liste avant move: \n");
         for (Cell i: grille)
         {
-            System.out.println(i.value);
+            str1 += i.value + ",";
         }
+        System.out.println(str1);
 
-        System.out.println(grid.move(grille[7]));
+        grid.move(grille[7]);
+        grid.move(grille[6]);
 
-        System.out.println("liste apres move: \n");
+        System.out.println("\n");
         for (Cell i: grille)
         {
-            System.out.println(i.value);
+            str2 += i.value + ",";
         }
+        System.out.println(str2);
     }
 }
