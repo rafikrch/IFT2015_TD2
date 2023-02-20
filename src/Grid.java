@@ -141,6 +141,7 @@ public class Grid
         } 
     }
 
+    //Méthode qui vérifie que le jeu est résolu correctement ou non:
     public boolean check_complete()
     {
         if ((grille[0].value == grille[8].value) && 
@@ -176,30 +177,5 @@ public class Grid
         move(grille[2]);
         move(grille[3]);
         move(grille[7]);
-    }
-
-    public static void main(String[] args)
-    {
-        String str1 = "";
-        String str2 = "";
-        Grid grid = new Grid();
-        //grid.solve_game();
-        //System.out.println(grid.check_complete());
-
-        for (Cell i: grille)
-        {
-            str1 += i.value + ",";
-        }
-        System.out.println(str1);
-
-        grid.move(grille[7]);
-        grid.move(grille[6]);
-
-        System.out.println("\n");
-        for (Cell i: grille)
-        {
-            str2 += i.value + ",";
-        }
-        System.out.println(str2);
     }
 }
